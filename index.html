@@ -156,41 +156,55 @@
         cacs[4].x = -1000, cacs[4].y = 270;
         cacs[5] = Game.createSprite("sm-cac3.png");
         cacs[5].x = -1000, cacs[5].y = 270;
-
+        var cacin=[1,0,0,0,0,0];
         var gg = Game.createSprite("GG.png");
         gg.x = -100, gg.y = -100;
         var re = Game.createSprite("reset.png");
         re.x = -100, re.y = -100;
 
-        var g = 0, speed = 10;
+        var g = 0, speed = 15 , len=1900;
 
         Game.forever(function () {
             if (!g && !s) {
                 dino.costumeId = 0;
-                dino.v += 0.6;
+                dino.v += 1.6   ;
                 dino.y += dino.v;
             }
             else if (!s) {
                 dino.y = 260;
             }
+            if(score == 100)speed=16;
+            else if(score == 200)speed=17;
+            else if(score == 400)speed=18;
+            else if(score == 600)speed=19;
+            else if(score == 800)speed=20;
+            else if(score == 900)speed=21;
+            else if(score == 1000)speed=22,len=2000;
+            else if(score == 1200)speed=23,len=2000;
+            else if(score == 1400)speed=24,len=2000;
+            else if(score == 1600)speed=25,len=2000;
+            else if(score == 1800)speed=26,len=2000;
+            else if(score == 2000)speed=27,len=2000;
             platform2.x -= speed;
             platform1.x -= speed;
             for (var i = 0; i < 6; i++) {
                 cacs[i].x -= speed;
-                if (cacs[i].x <= 1300 && cacs[i].x >= 1300) {
+                if (cacin[i]&&cacs[i].x<1300) {
+                    cacin[i]=0;
                     var ran = Math.floor(Math.random() * 5);
                     while (cacs[ran].x <= 1300 && cacs[ran].x >= 0) {
                         if (ran != 5) ran++;
                         else ran = 0;
                     }
 
-                    cacs[ran].x = (Math.floor(Math.random() * 7)) * 100 + 1800;
+                    cacs[ran].x = (Math.floor(Math.random() * 7)) * 100 + len;
+                    cacin[ran]=1;
                 }
             }
-            if (platform1.x <= -2400) {
+            if (platform1.x <= -2300) {
                 platform1.x = 2400;
             }
-            if (platform2.x <= -2400) {
+            if (platform2.x <= -2300) {
                 platform2.x = 2400;
             }
             if (dino.touched(cacs)) {
@@ -213,6 +227,7 @@
                 }
                 speed = 0;
                 s = 1;
+                ccacin=[1,0,0,0,0,0];
             }
         })
         dino.when("touch", realground, function () {
@@ -232,7 +247,7 @@
         }, 90);
         Game.when("keydown", "space", function () {
             if (g && !s) {
-                dino.v = -13;
+                dino.v = -25;
                 g = false;
             }
             else if (s) {
@@ -241,7 +256,7 @@
         })
         Game.when("keydown", "up", function () {
             if (g && !s) {
-                dino.v = -13;
+                dino.v = -25;
                 g = false;
             }
             else if (s) {
@@ -280,7 +295,9 @@
             gg.x = -100, gg.y = -100;
             re.x = -100, re.y = -100;
             g = 0;
-            speed = 10;
+            speed = 15;
+            len=1900;
+            cacin=[1,0,0,0,0,0];
         }
 
 
