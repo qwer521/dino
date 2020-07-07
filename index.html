@@ -245,40 +245,47 @@
                 dino.costumeId = 1;
             }
         }, 90);
+        var flag=0;
         Game.when("keydown", "space", function () {
             if (g && !s) {
                 dino.v = -25;
                 g = false;
             }
-            else if (s) {
+            else if (flag) {
+                flag=0;
                 restart();
                 dino.v = -20;
                 g = false;
             }
+            else if(s){
+                flag=1;
+            } 
         })
         Game.when("keydown", "up", function () {
             if (g && !s) {
                 dino.v = -20;
                 g = false;
             }
-            else if (s) {
+            else if (flag) {
+                flag=0;
                 restart();
                 dino.v = -20;
                 g = false;
             }
+            else if(s){
+                flag=1;
+            } 
         })
         Game.when("keydown", "down", function () {
             if (!g && !s) {
                 dino.v = 13;
             }
         })
-        var flag=0;
         Game.on("mousedown", function () {
             if (g && !s) {
                 dino.v = -25;
                 g = false;
             }
-            
             else if (flag) {
                 flag=0;
                 restart();
