@@ -89,7 +89,7 @@
 
         var dino = Game.createSprite(["asset/dino1.png", "asset/dino2.png", "asset/dino3.png", "asset/dino4.png"])
         dino.x = 60;
-        dino.y = 180;
+        dino.y = 270;
         dino.v = 10;
         var num1 = Game.createSprite(["num0.png", "num1.png", "num2.png", "num3.png", "num4.png", "num5.png", "num6.png", "num7.png", "num8.png", "num9.png"]);
         var num2 = Game.createSprite(["num0.png", "num1.png", "num2.png", "num3.png", "num4.png", "num5.png", "num6.png", "num7.png", "num8.png", "num9.png"]);
@@ -162,19 +162,19 @@
         var re = Game.createSprite("reset.png");
         re.x = -100, re.y = -100;
 
-        var g = 0, speed = 15 , len=1900;
+        var g = 0, speed = 0 , len=1900,s=1;
 
         Game.forever(function () {
             if (!g && !s) {
                 dino.costumeId = 0;
-                dino.v += 1.6   ;
+                dino.v += 1.6;
                 dino.y += dino.v;
             }
             else if (!s) {
                 dino.y = 260;
             }
             if(score == 100)speed=16;
-            else if(score == 200)speed=17;
+            else if(score == 200)speed=25;
             else if(score == 300)speed=18;
             else if(score == 500)speed=19;
             else if(score == 600)speed=20;
@@ -252,15 +252,19 @@
             }
             else if (s) {
                 restart();
+                dino.v = -20;
+                g = false;
             }
         })
         Game.when("keydown", "up", function () {
             if (g && !s) {
-                dino.v = -25;
+                dino.v = -20;
                 g = false;
             }
             else if (s) {
                 restart();
+                dino.v = -20;
+                g = false;
             }
         })
         Game.when("keydown", "down", function () {
@@ -268,11 +272,22 @@
                 dino.v = 13;
             }
         })
-
-        Game.on('mousedown', function () {
-            if (s) {
-                restart();
+        var flag=0;
+        Game.on("mousedown", function () {
+            if (g && !s) {
+                dino.v = -25;
+                g = false;
             }
+            
+            else if (flag) {
+                flag=0;
+                restart();
+                dino.v = -20;
+                g = false;
+            }
+            else if(s){
+                flag=1;
+            } 
         });
         function restart() {
             cacs[0].x = 2000, cacs[0].y = 270;
