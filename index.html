@@ -209,8 +209,8 @@
             }
             if (dino.touched(cacs)) {
                 dino.costumeId = 3;
-                gg.x = innerWidth/2, gg.y = 160;
-                re.x = innerWidth/2, re.y = 230;
+                gg.x = innerWidth / 2, gg.y = 160;
+                re.x = innerWidth / 2, re.y = 230;
                 newscore = num1.costumeId + num2.costumeId * 10 + num3.costumeId * 100 + num4.costumeId * 1000 + num5.costumeId * 10000
                 if (hiscore < newscore) {
                     hiscore = newscore;
@@ -320,6 +320,23 @@
             speed = 15;
             len = 1900;
             cacin = [1, 0, 0, 0, 0, 0];
+            Game.set({
+                width: innerWidth, // Default: 640px
+                height: innerHeight, // Default: 480px
+                debugMode: true, // Default: false
+                precision: 1
+            });
+            num1.x = innerWidth + 20, num1.y = 130;
+            num2.x = innerWidth, num2.y = 130;
+            num3.x = innerWidth - 20, num3.y = 130;
+            num4.x = innerWidth - 40, num4.y = 130;
+            num5.x = innerWidth - 60, num5.y = 130;
+            hi1.x = innerWidth - 100, hi1.y = 130;
+            hi2.x = innerWidth - 120, hi2.y = 130;
+            hi3.x = innerWidth - 140, hi3.y = 130;
+            hi4.x = innerWidth - 160, hi4.y = 130;
+            hi5.x = innerWidth - 180, hi5.y = 130;
+            hi.x = innerWidth - 330, hi.y = 105;
         }
 
 
